@@ -10,30 +10,16 @@ defmodule DistCache.Mixfile do
      deps: deps()]
   end
 
-  # Configuration for the OTP application
-  #
-  # Type "mix help compile.app" for more information
   def application do
-    [applications: [:riak_core, :logger],
+    [applications: [:riak_core, :logger, :eleveldb, :cuttlefish],
      mod: {DistCache, []}]
   end
 
-  # Dependencies can be Hex packages:
-  #
-  #   {:mydep, "~> 0.3.0"}
-  #
-  # Or git/path repositories:
-  #
-  #   {:mydep, git: "https://github.com/elixir-lang/mydep.git", tag: "0.1.0"}
-  #
-  # Type "mix help deps" for more examples and options
   defp deps do
     [
-      {:riak_core, "~> 2.2", hex: :riak_core_ng},
-      #{:eleveldb, "~> 2.2", override: true},
-      #{:cuttlefish, "~> 2.0.11", override: true},
-      #{:lager, "~> 2.1.1", override: true},
-      #{:goldrush, "~> 0.1.9", override: true},
+      {:riak_core, "~> 3.0", hex: :riak_core_ng},
+      {:eleveldb, "~> 2.2.20", override: true, compile: "rebar3 compile"},
+      {:cuttlefish, "~> 2.0.11", override: true, compile: "rebar3 compile"},
     ]
   end
 end
