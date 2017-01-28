@@ -14,7 +14,7 @@ defmodule DistCache.Mixfile do
   #
   # Type "mix help compile.app" for more information
   def application do
-    [applications: [:logger],
+    [applications: [:riak_core, :logger],
      mod: {DistCache, []}]
   end
 
@@ -28,6 +28,12 @@ defmodule DistCache.Mixfile do
   #
   # Type "mix help deps" for more examples and options
   defp deps do
-    []
+    [
+      {:riak_core, "~> 2.2", hex: :riak_core_ng},
+      #{:eleveldb, "~> 2.2", override: true},
+      #{:cuttlefish, "~> 2.0.11", override: true},
+      #{:lager, "~> 2.1.1", override: true},
+      #{:goldrush, "~> 0.1.9", override: true},
+    ]
   end
 end
