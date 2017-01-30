@@ -2,6 +2,12 @@
 
 Trying to use riak_core in Elixir.
 
+## Resources
+
+* https://github.com/project-fifo/riak_core
+* https://github.com/kanatohodets/elixir_riak_core_ping
+* https://medium.com/@GPad/create-a-riak-core-application-in-elixir-part-1-41354c1f26c3#.hxzh5zaw7
+
 ## Installation
 
 1. Clone this repo
