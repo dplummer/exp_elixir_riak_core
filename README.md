@@ -1,24 +1,16 @@
-# DistCache
+# Experiment with Elixir and Riak Core
 
-**TODO: Add description**
+Trying to use riak_core in Elixir.
 
 ## Installation
 
-If [available in Hex](https://hex.pm/docs/publish), the package can be installed as:
+1. Clone this repo
+2. Run `mix deps.get`
+3. Run `iex --name node1@127.0.0.1 -S mix run`
 
-  1. Add `dist_cache` to your list of dependencies in `mix.exs`:
+And it should work.
 
-    ```elixir
-    def deps do
-      [{:dist_cache, "~> 0.1.0"}]
-    end
-    ```
+## Docker
 
-  2. Ensure `dist_cache` is started before your application:
-
-    ```elixir
-    def application do
-      [applications: [:dist_cache]]
-    end
-    ```
-
+It doesn't build with docker yet. If it did, just running `docker build .`
+should build an image.
