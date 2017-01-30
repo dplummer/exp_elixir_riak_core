@@ -11,8 +11,15 @@ defmodule DistCache.Mixfile do
   end
 
   def application do
-    [applications: [:riak_core, :logger, :eleveldb, :cuttlefish],
-     mod: {DistCache, []}]
+    [
+      #applications: [
+      #  :riak_core,
+      #  :logger,
+      #  :eleveldb,
+      #  :cuttlefish,
+      #],
+      mod: {DistCache, []}
+    ]
   end
 
   defp deps do

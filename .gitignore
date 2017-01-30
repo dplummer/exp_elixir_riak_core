@@ -19,3 +19,6 @@ erl_crash.dump
 .env
 /test/tmp
 /tmp
+/ring_data_dir
+/log
+/data

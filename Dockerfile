@@ -3,14 +3,12 @@ FROM ubuntu:14.04
 ENV \
   EDITOR=vim \
   LANG=C.UTF-8 \
-  OTP_VERSION="18.3.4.4" \
-  ELIXIR_VERSION="v1.3.4"
+  OTP_VERSION="19.2.1" \
+  ELIXIR_VERSION="v1.4.0"
 
 ENV \
   OTP_DOWNLOAD_URL="https://github.com/erlang/otp/archive/OTP-$OTP_VERSION.tar.gz" \
-  OTP_DOWNLOAD_SHA256="3956f5c4fcd05848c7fe048d5c4ef7eaf002a8312cba0674150c5a10ab0e9f04" \
-  ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/${ELIXIR_VERSION}/Precompiled.zip" \
-  ELIXIR_DOWNLOAD_SHA256="eac16c41b88e7293a31d6ca95b5d72eaec92349a1f16846344f7b88128587e10"
+  ELIXIR_DOWNLOAD_URL="https://github.com/elixir-lang/elixir/releases/download/${ELIXIR_VERSION}/Precompiled.zip"
 
 RUN set -xe \
   && apt-get update \
@@ -34,7 +32,6 @@ RUN set -xe \
 
 RUN set -xe \
   && curl -fSL -o otp-src.tar.gz "$OTP_DOWNLOAD_URL" \
-  && echo "$OTP_DOWNLOAD_SHA256 otp-src.tar.gz" | sha256sum -c - \
   && mkdir -p /usr/src/otp-src \
   && tar -xzf otp-src.tar.gz -C /usr/src/otp-src --strip-components=1 \
   && rm otp-src.tar.gz \
@@ -47,7 +44,6 @@ RUN set -xe \
 
 RUN set -xe \
   && curl -fSL -o elixir-precompiled.zip $ELIXIR_DOWNLOAD_URL \
-  && echo "$ELIXIR_DOWNLOAD_SHA256 elixir-precompiled.zip" | sha256sum -c - \
   && unzip -d /usr/local elixir-precompiled.zip \
   && rm elixir-precompiled.zip
 
@@ -61,16 +57,23 @@ RUN \
 
 ENV PATH=$PATH:/root/.cache/rebar3/bin
 
-RUN mix local.hex --force && mix local.rebar rebar3 /src/rebar3/rebar3 --force
+RUN mix local.hex --force \
+  && mix local.rebar --force \
+  && mix local.rebar rebar3 /src/rebar3/rebar3 --force
 
 ENV APP_HOME /src/dist_cache
 RUN mkdir -p $APP_HOME
 WORKDIR $APP_HOME
 
-ADD config $APP_HOME/config/
-ADD test $APP_HOME/test/
-ADD lib $APP_HOME/lib/
-ADD mix.exs $APP_HOME/
-
+ADD mix.exs mix.lock $APP_HOME/
 RUN mix deps.get
+RUN mix deps.compile eleveldb
+RUN mix deps.compile cuttlefish
 RUN mix deps.compile
+
+ADD config $APP_HOME/priv/
+ADD lib $APP_HOME/lib/
+ADD priv $APP_HOME/config/
+ADD test $APP_HOME/test/
+
+RUN mix compile
