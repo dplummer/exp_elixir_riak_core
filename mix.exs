@@ -25,7 +25,7 @@ defmodule DistCache.Mixfile do
   defp deps do
     [
       {:riak_core, "~> 3.0", hex: :riak_core_ng},
-      {:eleveldb, "~> 2.2.20", override: true, compile: "rebar3 compile"},
+      #{:eleveldb, "~> 2.2.20", override: true, compile: "rebar3 compile"},
       {:cuttlefish, "~> 2.0.11", override: true, compile: "rebar3 compile"},
     ]
   end

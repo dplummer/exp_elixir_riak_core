@@ -10,6 +10,8 @@ Trying to use riak_core in Elixir.
 
 ## Installation
 
+Use Erlang/OTP 18
+
 1. Clone this repo
 2. Run `mix deps.get`
 3. Run `iex --name node1@127.0.0.1 -S mix run`
