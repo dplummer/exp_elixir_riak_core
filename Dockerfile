@@ -1,10 +1,10 @@
-FROM ubuntu:14.04
+FROM ubuntu:16.04
 
 ENV \
   EDITOR=vim \
   LANG=C.UTF-8 \
-  OTP_VERSION="19.2.1" \
-  ELIXIR_VERSION="v1.4.0"
+  OTP_VERSION="18.3.4" \
+  ELIXIR_VERSION="v1.4.2"
 
 ENV \
   OTP_DOWNLOAD_URL="https://github.com/erlang/otp/archive/OTP-$OTP_VERSION.tar.gz" \
@@ -67,8 +67,6 @@ WORKDIR $APP_HOME
 
 ADD mix.exs mix.lock $APP_HOME/
 RUN mix deps.get
-RUN mix deps.compile eleveldb
-RUN mix deps.compile cuttlefish
 RUN mix deps.compile
 
 ADD config $APP_HOME/priv/
