@@ -25,8 +25,9 @@ defmodule DistCache.Mixfile do
   defp deps do
     [
       {:riak_core, "~> 3.0", hex: :riak_core_ng},
-      #{:eleveldb, "~> 2.2.20", override: true, compile: "rebar3 compile"},
-      {:cuttlefish, "~> 2.0.11", override: true, compile: "rebar3 compile"},
+      {:cuttlefish, "~> 2.0.11", override: true, manager: :rebar3, github: "basho/cuttlefish", branch: "rebar3"},
+      {:lager, "~> 3.2", github: "basho/lager", branch: "rebar3", manager: :rebar3, override: true},
+      {:goldrush, ">= 0.1.8", [env: :prod, github: "basho/goldrush", branch: "rebar3", manager: :rebar3, override: true]},
     ]
   end
 end
