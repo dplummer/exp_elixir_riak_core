@@ -1,3 +1,5 @@
+# WARNING THIS DOESN'T WORK YET
+
 # Experiment with Elixir and Riak Core
 
 Trying to use riak_core in Elixir.
